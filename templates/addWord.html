@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- Contact Section-->
+<section class="page-section" id="contact" style="margin-top: 100px;">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">ADD A WORD</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Contact Section Form-->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                 <form method="POST">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>WORD</label>
+                            <input class="form-control"  name="word_en"  placeholder="İNGİLİZCE KELİME" required="required" data-validation-required-message="Please enter your word." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Türkçe Karşılığı</label>
+                            <input class="form-control" name="word_tr"  placeholder="TÜRKÇE KARŞILIĞI" required="required" data-validation-required-message="Please enter your word." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <span class="dropdown-el">
+                        <input type="radio" name="sortType" value="home" checked="checked" id="sort-relevance"><label for="sort-relevance">Home</label>
+                        <input type="radio" name="sortType" value="food" id="sort-best"><label for="sort-best">Food</label>
+                    </span>
+
+                    <br />
+                    <div id="success"></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" style="float:center;">KELİMEYİ EKLE</button>
+                    </div>
+
+                    
+                </form>
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

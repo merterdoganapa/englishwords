@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{%load static%}
+{% block body %}
+
+    <!-- Contact Section-->
+<section class="page-section" id="contact" style="margin-top: 100px;">
+    <div class="container">
+        {% if context %}
+            <div class="alert alert-danger">
+                {{context.error}}
+            </div>
+        {% else %}
+        {% endif %}
+
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">REGISTER</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Contact Section Form-->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Username</label>
+                            <input class="form-control"  name="username"  placeholder="Username" required="required" data-validation-required-message="Please enter your username." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Email Address</label>
+                            <input class="form-control" id="email" name="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Password</label>
+                            <input class="form-control" name="password" type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your password." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Confirm Password</label>
+                            <input class="form-control" name="confirm" type="password" placeholder="Confirm Password" required="required" data-validation-required-message="Please enter your password." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div id="success"></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}
+
