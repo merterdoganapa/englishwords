@@ -9,16 +9,18 @@
           <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
           <div class="divider-custom-line"></div>
       </div>
+      {% if user.is_authenticated %}
       <div class="divider-custom">
         <div class="divider-custom-icon"><a href="/word/addWord" class="btn btn-primary btn-xl">Kelime Ekle</a></div>
-        
-        <div class="divider-custom-icon"></div>
-    </div>
+      </div>
+      {% else %}
+      {% endif %}
+      
       {% if words %}
       <table class="table">
         <thead style="background:#1abc9c;">
           <tr>
-            <th scope="col">id</th>
+            <th></th>
             <th scope="col">Kelime</th>
             <th scope="col">Karşılığı</th>
             <th scope="col">Ekleyen</th>
@@ -34,8 +36,8 @@
           
           {% for word in words %}
             <tr>
-                <th scope="row">{{word.id}}</th>
-                <td><a href="/word/detail/{{word.id}}">{{word.word_en}}</a></td>
+                <th></th>
+                <th scope="row"><a href="/word/detail/{{word.id}}">{{word.word_en}}</a></th>
                 <td>{{word.word_tr}}</td>
                 <td>{{word.author}}</td>
                 {% if user.is_superuser%}

@@ -10,13 +10,20 @@ def wordsHome(request):
         words = Word.objects.filter(category = "home")
     except Word.DoesNotExist:
         words = None
-    if words is not None:
-        return render(request,"wordsHome.html",{
-            'words':words,
-            })
+    #if words is not None:
+    return render(request,"wordsHome.html",{
+        'words':words,
+        })
              
 def wordsFoods(request):
-    return render(request,"wordsFood.html")
+    try:
+        words = Word.objects.filter(category = "food")
+    except Word.DoesNotExist:
+        words = None
+    #if words is not None:
+    return render(request,"wordsFoods.html",{
+        'words':words,
+        })
 
 
 def detail(request,id):
@@ -25,8 +32,10 @@ def detail(request,id):
 
 def deleteWord(request,id):
     word = get_object_or_404(Word,id = id)
+    user = request.user
     category = word.category
-    word.delete()
+    if user == word.author:
+        word.delete()
     return redirect(category)
 
 def addWord(request):
