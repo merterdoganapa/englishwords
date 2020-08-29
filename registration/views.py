@@ -16,6 +16,7 @@ def registerUser(request):
             newUser = User(username=username,email=email)
             newUser.set_password(password)
             newUser.save()
+            messages.success("Başarıyla kayıt oldunuz.")
             return redirect("login")
         else:
             context = {
@@ -29,11 +30,12 @@ def loginUser(request):
         password = request.POST.get("password")
         user = authenticate(username=username,password=password)
         if user is not None:
+            messages.success(request,'Başarıyla Giriş Yaptınız.')
             login(request,user)
             return redirect("index")
 
     return render(request,"login.html")
 def logoutUser(request):
     logout(request)
-    messages.warning(request,'Çıkış Yaptınız')
+    messages.info(request,'Çıkış Yaptınız')
     return redirect("index")

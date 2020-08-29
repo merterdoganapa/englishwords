@@ -3,8 +3,10 @@
 
 {% block body %}
     
-    <div class="container" style="margin-top:250px;margin-left:500px;">
-        {{word.word_tr}}
-        xd dfd
+    <div class="row" style="margin-top:250px;margin-left:450px;">
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+        </form>
     </div>
 {% endblock body %} 
