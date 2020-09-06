@@ -3,6 +3,7 @@ from .forms import WordForm
 from .models import Word
 from django.contrib.auth.models import User
 from django.contrib import messages
+import string
 def index(request):
     return render(request,"index.html")
 
@@ -12,7 +13,6 @@ def wordsHome(request):
         words = Word.objects.filter(category = "home").order_by('-created_date')
     except Word.DoesNotExist:
         words = None
-    #if words is not None:
     return render(request,"wordsHome.html",{
         'words':words,
         })
@@ -22,11 +22,42 @@ def wordsFoods(request):
         words = Word.objects.filter(category = "food").order_by('-created_date')
     except Word.DoesNotExist:
         words = None
-    #if words is not None:
     return render(request,"wordsFoods.html",{
         'words':words,
         })
 
+def wordsTechnology(request):
+    try:
+        words = Word.objects.filter(category = "technology").order_by('-created_date')
+    except Word.DoesNotExist:
+        words = None
+    return render(request,"wordsTechnology.html",{
+        'words':words,
+        })
+def wordsTransportation(request):
+    try:
+        words = Word.objects.filter(category = "transportation").order_by('-created_date')
+    except Word.DoesNotExist:
+        words = None
+    return render(request,"wordsTransportation.html",{
+        'words':words,
+        })
+def wordsVerbs(request):
+    try:
+        words = Word.objects.filter(category = "transportation").order_by('-created_date')
+    except Word.DoesNotExist:
+        words = None
+    return render(request,"wordsVerbs.html",{
+        'words':words,
+        })
+def wordsGeneral(request):
+    try:
+        words = Word.objects.filter(category = "general").order_by('-created_date')
+    except Word.DoesNotExist:
+        words = None
+    return render(request,"wordsGeneral.html",{
+        'words':words,
+        })
 
 def detail(request,id):
     word = get_object_or_404(Word,id=id)
@@ -68,4 +99,6 @@ def myWords(request):
         words = Word.objects.filter(author = request.user)
     except Word.DoesNotExist:
         words = None
+    for word in words:
+        word.category = string.capwords(word.category)
     return render(request,"myWords.html",{'words':words})

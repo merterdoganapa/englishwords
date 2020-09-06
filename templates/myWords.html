@@ -18,11 +18,8 @@
             <th></th>
             <th scope="col">Kelime</th>
             <th scope="col">Karşılığı</th>
-            {% if user.is_superuser %}
+            <th scope="col">Kategori</th>
             <th scope="col"></th>
-            <th scope="col"></th>
-            {% else %}
-            {% endif %}
             
           </tr>
         </thead>
@@ -33,11 +30,9 @@
                 <th></th>
                 <th scope="row"><a href="/word/detail/{{word.id}}">{{word.word_en}}</a></th>
                 <td>{{word.word_tr}}</td>
-                {% if user.is_superuser%}
-                <td><a href="/word/delete/{{word.id}}">Sil</a></td>
-                <td><a href="/word/update/{{word.id}}">Güncelle</a></td>
-                {% else %}
-                {% endif %}
+                <td>{{word.category}}</td>
+                <td><a href="/word/delete/{{word.id}}">Sil</a>
+                <a href="/word/update/{{word.id}}">Güncelle</a></td>
                 
               </tr>
               
@@ -47,7 +42,7 @@
         </tbody>
       </table>
       {% else %}
-      <div class="alert alert-danger">Henüz Kelime Eklemediniz</div>
+      <div class="alert alert-danger text-center">Henüz Kelime Eklemediniz</div>
       {% endif %}
         
 

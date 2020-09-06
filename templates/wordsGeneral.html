@@ -17,13 +17,14 @@
       {% endif %}
       
       {% if words %}
-      <table class="table text-center" style="margin-bottom:100px;">
+      <table class="table" style="margin-bottom:100px;">
         <thead style="background:#1abc9c;">
           <tr>
             <th scope="col">Kelime</th>
             <th scope="col">Karşılığı</th>
             <th scope="col">Ekleyen</th>
             {% if user.is_superuser %}
+            <th scope="col"></th>
             <th scope="col"></th>
             {% else %}
             {% endif %}
@@ -34,11 +35,13 @@
           
           {% for word in words %}
             <tr>
+                <th></th>
                 <th scope="row"><a href="/word/detail/{{word.id}}">{{word.word_en}}</a></th>
                 <td>{{word.word_tr}}</td>
                 <td>{{word.author}}</td>
                 {% if user.is_superuser%}
-                <td><a href="/word/delete/{{word.id}}">Sil         </a><a href="/word/update/{{word.id}}">             Güncelle</a></td>
+                <td><a href="/word/delete/{{word.id}}">Sil</a></td>
+                <td><a href="/word/update/{{word.id}}">Güncelle</a></td>
                 {% else %}
                 {% endif %}
                 
@@ -50,7 +53,7 @@
         </tbody>
       </table>
       {% else %}
-      <div class="alert alert-danger text-center" style="margin-bottom:145px;">Henüz Kelime Eklemediniz</div>
+        <div class="alert alert-danger text-center" style="margin-bottom:145px;">Henüz Kelime Eklemediniz</div>
       {% endif %}
         
 

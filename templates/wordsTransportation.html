@@ -2,7 +2,7 @@
 {% block body %}
     <div class="container" style="margin-top: 175px;">
       {% include "include/show_messages.html" %}
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">HOME</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">TRANSPORTATION</h2>
       <!-- Icon Divider-->
       <div class="divider-custom">
           <div class="divider-custom-line"></div>
@@ -11,13 +11,13 @@
       </div>
       {% if user.is_authenticated %}
       <div class="divider-custom">
-        <div class="divider-custom-icon"><a href="/word/addWord/home" class="btn btn-primary btn-xl">Kelime Ekle</a></div>
+        <div class="divider-custom-icon"><a href="/word/addWord/transportation" class="btn btn-primary btn-xl">Kelime Ekle</a></div>
       </div>
       {% else %}
       {% endif %}
       
       {% if words %}
-      <table class="table text-center" style="margin-bottom:100px;">
+      <table class="table text-center" style="margin-bottom:100px">
         <thead style="background:#1abc9c;">
           <tr>
             <th scope="col">Kelime</th>
@@ -50,7 +50,7 @@
         </tbody>
       </table>
       {% else %}
-      <div class="alert alert-danger text-center" style="margin-bottom:145px;">Henüz Kelime Eklemediniz</div>
+      <div class="alert alert-danger text-center"  >Henüz Kelime Eklemediniz</div>
       {% endif %}
         
 

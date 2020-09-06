@@ -16,13 +16,11 @@ def registerUser(request):
             newUser = User(username=username,email=email)
             newUser.set_password(password)
             newUser.save()
-            messages.success("Başarıyla kayıt oldunuz.")
+            messages.success(request,"Başarıyla kayıt oldunuz.")
             return redirect("login")
         else:
-            context = {
-                'error' : "Parolar Eşleşmiyor",
-            }
-            render(request,"register.html",context=context)
+            messages.warning(request,"Parolalar Eşleşmiyor")
+            render(request,"register.html")
     return render(request,"register.html")
 def loginUser(request):
     if request.method == "POST":
