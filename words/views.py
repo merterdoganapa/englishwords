@@ -44,7 +44,7 @@ def wordsTransportation(request):
         })
 def wordsVerbs(request):
     try:
-        words = Word.objects.filter(category = "transportation").order_by('-created_date')
+        words = Word.objects.filter(category = "verb").order_by('-created_date')
     except Word.DoesNotExist:
         words = None
     return render(request,"wordsVerbs.html",{

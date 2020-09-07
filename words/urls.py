@@ -8,7 +8,7 @@ urlpatterns = [
     path('technology/',views.wordsTechnology,name = "technology"),
     path('general/',views.wordsGeneral,name = "general"),
     path('transportation/',views.wordsTransportation,name = "transportation"),
-    path('verbs/',views.wordsVerbs,name = "verbs"),
+    path('verbs/',views.wordsVerbs,name = "verb"),
     path('detail/<int:id>/',views.detail,name = "detail"),
     path('delete/<int:id>/',views.deleteWord,name = "delete"),
     path('myWords/',views.myWords,name = "myWords"), 
@@ -17,4 +17,5 @@ urlpatterns = [
     path('addWord/technology',views.addWord,name ="addWord"),
     path('addWord/general',views.addWord,name = "addWord"),
     path('addWord/transportation',views.addWord,name = "addWord"),
+    path('addWord/verb',views.addWord,name = "addWord"),
 ]
