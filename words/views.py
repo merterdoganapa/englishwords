@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .forms import WordForm
-from .models import Word
+from .models import Word,Comment
 from django.contrib.auth.models import User
 from django.contrib import messages
 import string
@@ -61,10 +61,14 @@ def wordsGeneral(request):
 
 def detail(request,id):
     word = get_object_or_404(Word,id=id)
-    #form = WordForm(request.POST or None)
-    #if form.is_valid():
-    #    word.content = form.cleaned_data['content']
-    return render(request,"detail.html",{'word':word})
+    word.word_en = string.capwords(word.word_en)
+    comments = word.comments.all()
+    if request.method == "POST":
+        sentence = request.POST.get("sentence")
+        new_comment = Comment(comment_content =sentence,word = word)
+        new_comment.comment_author = request.user
+        new_comment.save()
+    return render(request,"detail.html",{'word':word,'comments':comments})
 
 def deleteWord(request,id):
     word = get_object_or_404(Word,id = id)
@@ -74,6 +78,14 @@ def deleteWord(request,id):
         messages.success(request,"Kelime başarıyla silindi.")
         word.delete()
     return redirect(category)
+
+def deleteComment(request,id):
+    comment = get_object_or_404(Comment,id = id)
+    user = request.user
+    if user.is_superuser or user == comment.comment_author:
+        messages.success(request,"Yorum başarıyla silindi.")
+        comment.delete()
+    return redirect("index")
 
 def addWord(request):
     if request.method == "POST":

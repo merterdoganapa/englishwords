@@ -18,4 +18,5 @@ urlpatterns = [
     path('addWord/general',views.addWord,name = "addWord"),
     path('addWord/transportation',views.addWord,name = "addWord"),
     path('addWord/verb',views.addWord,name = "addWord"),
+    path('delete/<int:id>',views.deleteComment,name = "deleteComment"),
 ]
