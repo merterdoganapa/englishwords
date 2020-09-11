@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- Contact Section-->
+<section class="page-section" id="contact" style="margin-top: 100px;">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">UPDATE A WORD</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Contact Section Form-->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                 <form method="POST">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Your word</label>
+                            <input class="form-control"  name="word_en" value="{{word.word_en}}" placeholder="WORD" required="required" data-validation-required-message="Please enter your word." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Translation of your word</label>
+                            <input class="form-control" name="word_tr" value="{{word.word_tr}}" placeholder="TRANSLATION OF YOUR WORD" required="required" data-validation-required-message="Please enter your word." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    
+
+                    <br />
+                    <div id="success"></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" style="float:center;">UPDATE</button>
+                    </div>
+
+                    
+                </form>
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

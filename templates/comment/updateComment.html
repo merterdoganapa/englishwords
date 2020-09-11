@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+    
+    <!--<div class="row" style="margin-top:250px;margin-left:450px;">
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+        </form>
+    </div>-->
+
+    <div class="container" style="margin-top:200px;">
+        
+        <!-- Contact Section Heading-->
+        {% include "include/show_messages.html" %}
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">UPDATE SENTENCE</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+        
+          <!-- Post Content Column -->
+          <div class="col-lg-8 ortala">
+             <div class="card my-4">
+              <h5 class="card-header">Leave a Sentence:</h5>
+              <div class="card-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <textarea class="form-control" rows="3" name="sentence" ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+    
+          
+    
+        </div>
+        <!-- /.row -->
+    
+      </div>
+
+
+{% endblock body %} 

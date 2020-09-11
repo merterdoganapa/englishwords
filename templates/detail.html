@@ -43,8 +43,8 @@
                 {{comment.comment_content}}
                 <br>
                 {% if user.is_superuser or user == comment.comment_author %}
-                <a href="{% url 'deleteComment' comment.id %}">Sil</a>
-                <a href="">Güncelle</a>
+                <a href="{% url 'words:deleteComment' comment.id %}">Sil</a>
+                <a href="{% url 'words:updateComment' comment.id %}">Güncelle</a>
                 {% else %}
                 {% endif %}
                 

@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,get_object_or_404,redirect,reverse
 from .forms import WordForm
 from .models import Word,Comment
 from django.contrib.auth.models import User
@@ -70,6 +70,15 @@ def detail(request,id):
         new_comment.save()
     return render(request,"detail.html",{'word':word,'comments':comments})
 
+def updateWord(request,id):
+    word = get_object_or_404(Word,id = id)
+    if request.method == "POST":
+        word.word_en = request.POST.get("word_en")
+        word.word_tr = request.POST.get("word_tr")
+        word.save()
+        return redirect("words:"+word.category)
+    return render(request,"wordUpdate.html",{'word':word})
+
 def deleteWord(request,id):
     word = get_object_or_404(Word,id = id)
     user = request.user
@@ -77,15 +86,9 @@ def deleteWord(request,id):
     if user.is_superuser or user == word.author:
         messages.success(request,"Kelime başarıyla silindi.")
         word.delete()
-    return redirect(category)
+    return redirect("words:"+category)
 
-def deleteComment(request,id):
-    comment = get_object_or_404(Comment,id = id)
-    user = request.user
-    if user.is_superuser or user == comment.comment_author:
-        messages.success(request,"Yorum başarıyla silindi.")
-        comment.delete()
-    return redirect("index")
+
 
 def addWord(request):
     if request.method == "POST":
@@ -97,11 +100,11 @@ def addWord(request):
         for word in words:
             if str(word).lower() == str(word_en).lower():
                 messages.error(request,"Eklemeye çalıştığınız kelime daha önceden eklenmiş!")
-                return redirect(category)
+                return redirect("words:"+category)
         messages.success(request,"Kelime başarıyla eklendi.")
         word = Word(word_en = word_en , word_tr=word_tr,category=category,author=author)
         word.save()
-        return redirect(category)
+        return redirect("words:"+category)
      
     return render(request,"addWord.html")
 
@@ -114,3 +117,25 @@ def myWords(request):
     for word in words:
         word.category = string.capwords(word.category)
     return render(request,"myWords.html",{'words':words})
+
+
+#COMMENT 
+
+def deleteComment(request,id):
+    comment = get_object_or_404(Comment,id = id)
+    user = request.user
+    if user.is_superuser or user == comment.comment_author:
+        messages.success(request,"Yorum başarıyla silindi.")
+        comment.delete()
+    return redirect("index")
+
+def updateComment(request,id):
+    if request.method == "POST":
+        comment = get_object_or_404(Comment,id = id)
+        user = request.user
+        if user.is_superuser or user == comment.comment_author:
+            messages.success(request,"Yorum başarıyla güncellendi.")
+            comment.comment_content = request.POST.get("sentence")
+            comment.save()
+            return redirect(reverse("words:detail",kwargs={'id':comment.word.id}))
+    return render(request,"comment/updateComment.html")
